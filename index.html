@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>¿Quieres ser mi San Valentín?</title>
+  <style>
+    body {
+      margin:0;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      background:#ffe6f0;
+      font-family:Arial, sans-serif;
+      overflow:hidden;
+    }
+    h1, h2 {
+      color:#d63384;
+      text-shadow:1px 1px 2px #fff;
+    }
+    button {
+      margin:10px;
+      padding:10px 20px;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:16px;
+    }
+    .yes { background:#ff4d6d; color:white; }
+    .maybe { background:#ffc107; color:black; }
+    .heart {
+      position:absolute;
+      color:#ff4d6d;
+      font-size:24px;
+      animation: float 6s linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(1); opacity:1; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity:0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Haz clic si quieres descubrir algo especial…</h1>
+  <button onclick="showMessage()">Descubrir 💌</button>
+  <div id="message"></div>
+
+  <!-- Música romántica -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function showMessage(){
+      document.getElementById("message").innerHTML = `
+        <h2>¿Quieres ser mi San Valentín? 💖</h2>
+        <button class="yes" onclick="alert('¡Gracias! Este será nuestro mejor San Valentín 💕')">Sí, quiero 💕</button>
+        <button class="maybe" onclick="alert('No pasa nada, igual ya te ganaste mi corazón 🤗')">Déjame pensarlo 🤔</button>
+      `;
+      createHearts();
+    }
+
+    function createHearts(){
+      setInterval(()=>{
+        const heart = document.createElement("div");
+        heart.className="heart";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.animationDuration=(3+Math.random()*3)+"s";
+        heart.innerHTML="❤";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),6000);
+      },500);
+    }
+  </script>
+</body>
+</html>
